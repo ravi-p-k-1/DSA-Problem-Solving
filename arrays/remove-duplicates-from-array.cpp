@@ -10,16 +10,22 @@ int main(){
 
     vector<int> vec = {1,1,2,2,2,3,3};
 
-    map<int, int> mpp;
+    int n=vec.size();
+    
+    int i=0, j=0;
 
-    for(auto &i: vec){
-        mpp[i]=1;
+    while(j<n){
+        if(vec[j]!=vec[i]){
+            i++;
+            vec[i]=vec[j];
+        }
+        j++;
     }
+    i++;
 
-    vec.clear();
-
-    for(auto &i: mpp){
-        vec.push_back(i.first);
+    while(i<n){
+        vec.pop_back();
+        i++;
     }
 
     for(auto &i: vec){
