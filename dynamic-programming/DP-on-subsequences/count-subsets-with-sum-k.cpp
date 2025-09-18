@@ -6,11 +6,10 @@ using namespace std;
 // Count Subsets with Sum K
 
 int memoization(vector<vector<int>> &dp, vector<int> &vec, int ind, int target){
-
-    if(target==0) return 1;
     if(ind==0){
-        if(vec[ind]==target) return 1;
-        else return 0;
+        if(target==0 && vec[0]==0) return 2;
+        if(target==0 || vec[ind]==target) return 1;
+        return 0;
     }
 
     if(dp[ind][target]!=-1) return dp[ind][target];
@@ -26,9 +25,9 @@ int memoization(vector<vector<int>> &dp, vector<int> &vec, int ind, int target){
 
 int main(){
 
-    vector<int> vec = {1, 2, 2, 3};
+    vector<int> vec = {0, 0, 1};
     int n=vec.size();
-    int k=3;
+    int k=1;
 
     vector<vector<int>> dp(n, vector<int>(k+1, -1));
 
