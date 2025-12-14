@@ -33,7 +33,7 @@ int tabulation(string &s1, string &s2, vector<vector<int>> &dp){
         else dp[i][0]=0;
     }
     
-    for(int i=0; i<n; i++){
+    for(int i=0; i<m; i++){
         if(s1[0]==s2[i]) dp[0][i]=1;
         else dp[0][i]=0;
     }
