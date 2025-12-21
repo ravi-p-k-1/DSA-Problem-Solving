@@ -24,50 +24,47 @@ int memoization(string &s1, string &s2, int i, int j, vector<vector<int>> &dp){
 }
 
 int tabulation(string &s1, string &s2, vector<vector<int>> &dp){
+    int n=s1.size();
+    int m=s2.size();
 
-    int n = s1.size();
-    int m = s2.size();
-
-    for(int i=0; i<n; i++){
-        if(s1[i]==s2[0]) dp[i][0]=1;
-        else dp[i][0]=0;
-    }
-    
-    for(int i=0; i<m; i++){
-        if(s1[0]==s2[i]) dp[0][i]=1;
-        else dp[0][i]=0;
+    for(int i=0; i<=n; i++){
+        dp[i][0] = 0;
     }
 
-    for(int i=1; i<n; i++){
-        for(int j=1; j<m; j++){
-            int ans=0;
-            
-            if(s1[i]==s2[j]){
-                ans = 1+dp[i-1][j-1];
+    for(int i=0; i<=m; i++){
+        dp[0][i] = 0;
+    }
+
+    for(int i=1; i<=n; i++){
+        for(int j=1; j<=m; j++){
+            int val=0;
+            if(s1[i-1]==s2[j-1]){
+                val = 1 + dp[i-1][j-1];
             }
             else{
-                ans = max(dp[i-1][j], dp[i][j-1]);
+                val = max(dp[i-1][j], dp[i][j-1]);
             }
-            
-            dp[i][j] = ans;
+            dp[i][j] = val;
         }
     }
 
-    return dp[n-1][m-1];
+    return dp[n][m];
 
 }
 
 int main(){
 
-    string s1 = "adebc";
-    string s2 = "dcadb";
+    string s1 = "eeeme";
+    string s2 = "emeee";
 
     int n = s1.size();
     int m = s2.size();
 
-    vector<vector<int>> dp(n, vector<int>(m, -1));
-
+    // vector<vector<int>> dp(n, vector<int>(m, -1));
     // cout<<memoization(s1, s2, n-1, m-1, dp);
+
+    
+    vector<vector<int>> dp(n+1, vector<int>(m+1, -1));
     cout<<tabulation(s1, s2, dp);
 
     return 0;
