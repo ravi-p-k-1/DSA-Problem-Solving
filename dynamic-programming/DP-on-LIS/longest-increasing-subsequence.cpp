@@ -21,13 +21,32 @@ int LIS(vector<int> &nums, int n){
     return lis.size();
 }
 
+int memoization(vector<int> &nums, vector<vector<int>> &dp, int ind, int prev){
+
+    if(ind==nums.size()) return 0;
+
+    if(dp[ind][prev+1]!=-1) return dp[ind][prev+1];
+
+    int nottake = memoization(nums, dp, ind+1, prev);
+    int take = INT_MIN;
+    if(prev==-1 || nums[ind]>nums[prev]){
+        take = 1+memoization(nums, dp, ind+1, ind);
+    }
+
+    return dp[ind][prev+1] = max(take, nottake);
+
+}
+
 int main(){
 
     vector<int> nums = {0, 1, 0, 3, 2, 3};
     
     int n=nums.size();
 
-    cout<<LIS(nums, n);
+    // cout<<LIS(nums, n);
+
+    vector<vector<int>> dp(n, vector<int>(n+1, -1));
+    cout<<memoization(nums, dp, 0, -1);
 
     return 0;
 }
