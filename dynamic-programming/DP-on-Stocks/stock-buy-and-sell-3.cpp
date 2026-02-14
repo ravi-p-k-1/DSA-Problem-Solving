@@ -43,7 +43,7 @@ int tabulation(vector<int> &prices, vector<vector<vector<int>>> &dp){
 
 int main(){
 
-    vector<int> prices = {3, 3, 5, 0, 0, 1, 4};
+    vector<int> prices = {3, 3, 5, 0, 0, 3, 1, 4};
 
     int n = prices.size();
 
